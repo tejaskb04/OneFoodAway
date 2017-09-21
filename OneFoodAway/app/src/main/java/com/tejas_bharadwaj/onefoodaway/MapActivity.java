@@ -159,8 +159,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            String name = "NA";
-            String snippet = "NA";
+            String name = null;
+            String snippet = null;
             String placeId;
             double lat, lng;
             try {
@@ -197,8 +197,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    String name = null;
-                    String snippet = null;
+                    String name = "NA";
+                    String snippet = "NA";
                     if (marker.getTitle() != null) {
                         name = marker.getTitle();
                     }

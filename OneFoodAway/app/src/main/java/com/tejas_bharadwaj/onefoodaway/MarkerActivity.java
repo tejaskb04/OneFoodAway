@@ -63,9 +63,10 @@ public class MarkerActivity extends AppCompatActivity {
                         .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                         .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                         .resize(width, 0)
-                        //.fit()
-                        //.centerCrop()
                         .into(imageView);
+                imageView.setImageResource(0);
+                imageView.setImageDrawable(null);
+                Picasso.with(MarkerActivity.this).invalidate(photoUrl);
             }
         }
     };
@@ -199,7 +200,7 @@ public class MarkerActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-
+            deleteCache(MarkerActivity.this);
         }
         return super.onKeyDown(keyCode, event);
     }
