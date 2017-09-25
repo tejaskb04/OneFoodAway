@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -64,9 +65,6 @@ public class MarkerActivity extends AppCompatActivity {
                         .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                         .resize(width, 0)
                         .into(imageView);
-                imageView.setImageResource(0);
-                imageView.setImageDrawable(null);
-                Picasso.with(MarkerActivity.this).invalidate(photoUrl);
             }
         }
     };
@@ -200,6 +198,14 @@ public class MarkerActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            for (int i = 0; i < photoLayout.getChildCount(); i++) {
+                View v = photoLayout.getChildAt(i);
+                if (v instanceof ImageView) {
+                    v = null;
+                    photoLayout.removeViewAt(i);
+                }
+            }
+            photoLayout.removeAllViews();
             deleteCache(MarkerActivity.this);
         }
         return super.onKeyDown(keyCode, event);
